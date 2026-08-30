@@ -39,3 +39,124 @@ tasks.named('test') {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+def packageOutputDirectory = layout.buildDirectory.dir('jpackage')
+def windowsIcon = layout.projectDirectory.file('src/main/resources/images/mypdf-icon.ico')
+def java25Launcher = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks.register('packageApp', Exec) {
+    group = 'distribution'
+    description = 'jpackage로 Windows용 MyPDF 설치 프로그램을 생성합니다.'
+    dependsOn tasks.named('installDist')
+
+    doFirst {
+        if (!System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+            throw new GradleException('packageApp 작업은 Windows에서만 실행할 수 있습니다.')
+        }
+
+        File jpackageExecutable = new File(
+                java25Launcher.get().metadata.installationPath.asFile,
+                'bin/jpackage.exe'
+        )
+        if (!jpackageExecutable.isFile()) {
+            throw new GradleException("Java 25 jpackage를 찾을 수 없습니다: ${jpackageExecutable}")
+        }
+
+        File outputDirectory = packageOutputDirectory.get().asFile
+        delete(outputDirectory)
+        outputDirectory.mkdirs()
+        File inputDirectory = layout.buildDirectory.dir('install/MyPDF/lib').get().asFile
+        String javafxModulePath = [
+                'javafx-base-25-win.jar',
+                'javafx-graphics-25-win.jar',
+                'javafx-controls-25-win.jar',
+                'javafx-swing-25-win.jar'
+        ].collect { new File(inputDirectory, it).absolutePath }.join(File.pathSeparator)
+
+        List<String> packageArguments = [
+                '--type', 'exe',
+                '--name', 'MyPDF',
+                '--app-version', project.version.toString(),
+                '--description', 'Local PDF utility for merging, splitting, and organizing PDF files',
+                '--vendor', 'MyPDF',
+                '--input', inputDirectory.absolutePath,
+                '--module-path', javafxModulePath,
+                '--add-modules', 'javafx.controls,javafx.swing',
+                '--main-jar', "MyPDF-${project.version}.jar",
+                '--main-class', application.mainClass.get(),
+                '--dest', outputDirectory.absolutePath,
+                '--win-menu',
+                '--win-menu-group', 'MyPDF',
+                '--win-dir-chooser',
+                '--win-upgrade-uuid', '2f24d1b3-8656-4c77-8f32-a38d6c0e36f7'
+        ]
+
+        if (windowsIcon.asFile.isFile()) {
+            packageArguments.addAll('--icon', windowsIcon.asFile.absolutePath)
+        } else {
+            logger.lifecycle('Windows 아이콘 없이 패키징합니다. 아이콘을 적용하려면 src/main/resources/images/mypdf-icon.ico를 추가하세요.')
+        }
+
+        commandLine([jpackageExecutable.absolutePath] + packageArguments)
+    }
+}
+
+tasks.register('packageAppDebug', Exec) {
+    group = 'distribution'
+    description = 'Windows 콘솔이 활성화된 디버그용 MyPDF 설치 프로그램을 생성합니다.'
+    dependsOn tasks.named('installDist')
+
+    doFirst {
+        if (!System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+            throw new GradleException('packageAppDebug 작업은 Windows에서만 실행할 수 있습니다.')
+        }
+
+        File jpackageExecutable = new File(
+                java25Launcher.get().metadata.installationPath.asFile,
+                'bin/jpackage.exe'
+        )
+        if (!jpackageExecutable.isFile()) {
+            throw new GradleException("Java 25 jpackage를 찾을 수 없습니다: ${jpackageExecutable}")
+        }
+
+        File outputDirectory = layout.buildDirectory.dir('jpackage-debug').get().asFile
+        delete(outputDirectory)
+        outputDirectory.mkdirs()
+        File inputDirectory = layout.buildDirectory.dir('install/MyPDF/lib').get().asFile
+        String javafxModulePath = [
+                'javafx-base-25-win.jar',
+                'javafx-graphics-25-win.jar',
+                'javafx-controls-25-win.jar',
+                'javafx-swing-25-win.jar'
+        ].collect { new File(inputDirectory, it).absolutePath }.join(File.pathSeparator)
+
+        List<String> packageArguments = [
+                '--type', 'exe',
+                '--name', 'MyPDF',
+                '--app-version', project.version.toString(),
+                '--description', 'Local PDF utility for merging, splitting, and organizing PDF files',
+                '--vendor', 'MyPDF',
+                '--input', inputDirectory.absolutePath,
+                '--module-path', javafxModulePath,
+                '--add-modules', 'javafx.controls,javafx.swing',
+                '--main-jar', "MyPDF-${project.version}.jar",
+                '--main-class', application.mainClass.get(),
+                '--dest', outputDirectory.absolutePath,
+                '--win-console',
+                '--win-menu',
+                '--win-menu-group', 'MyPDF',
+                '--win-dir-chooser',
+                '--win-upgrade-uuid', '2f24d1b3-8656-4c77-8f32-a38d6c0e36f7'
+        ]
+
+        if (windowsIcon.asFile.isFile()) {
+            packageArguments.addAll('--icon', windowsIcon.asFile.absolutePath)
+        } else {
+            logger.lifecycle('Windows 아이콘 없이 패키징합니다. 아이콘을 적용하려면 src/main/resources/images/mypdf-icon.ico를 추가하세요.')
+        }
+
+        commandLine([jpackageExecutable.absolutePath] + packageArguments)
+    }
+}

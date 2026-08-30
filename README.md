@@ -25,29 +25,30 @@ PDF 페이지를 썸네일로 확인하면서 정리할 수 있습니다.
 
 ## 📢 실행 방법
 
-### 요구 환경
+### 설치
 
-- Java 25
-- Windows
+GitHub Releases에서 최신 버전의 `MyPDF-1.0.0.exe`를 다운로드합니다.
 
-### 실행
+다운로드한 설치 파일을 실행하여 MyPDF를 설치합니다.
 
-저장소를 Clone합니다.
+설치가 완료되면 Windows 시작 메뉴에서 `MyPDF`를 검색하여 실행할 수 있습니다.
+
+별도의 Java, JavaFX, Gradle 설치는 필요하지 않습니다.
+
+PDF 병합, 분할 및 정리 작업은 외부 서버를 사용하지 않고 로컬 PC에서 처리됩니다.
+
+### 직접 실행
+
+소스 코드를 직접 실행하려면 Java 25가 필요합니다.
+
+저장소를 Clone한 뒤 프로젝트 폴더에서 다음 명령어를 실행합니다.
 
 ```bash
 git clone https://github.com/Jmin0613/MyPDF.git
 cd MyPDF
 ```
 
-또는 GitHub에서 ZIP 파일을 다운로드한 뒤 압축을 해제합니다.
-
-PowerShell 또는 터미널에서 다음 명령어를 실행합니다.
-
 ```powershell
 .\gradlew.bat run
 ```
-
-최초 실행 시 필요한 Gradle 의존성을 다운로드하기 위해 인터넷 연결이 필요할 수 있습니다.
-
-PDF 병합, 분할 및 정리 작업 자체는 외부 서버를 사용하지 않고 로컬에서 처리됩니다.
 
