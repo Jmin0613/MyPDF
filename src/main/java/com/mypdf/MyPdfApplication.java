@@ -1,6 +1,7 @@
 package com.mypdf;
 
 import com.mypdf.ui.MergeView;
+import com.mypdf.ui.OrganizeView;
 import com.mypdf.ui.SplitView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -23,7 +24,8 @@ public class MyPdfApplication extends Application {
         tabs.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         tabs.getTabs().addAll(
                 new Tab("PDF 병합", new MergeView(stage)),
-                new Tab("PDF 분할", new SplitView(stage))
+                new Tab("PDF 분할", new SplitView(stage)),
+                new Tab("PDF 정리", new OrganizeView(stage))
         );
         VBox.setVgrow(tabs, javafx.scene.layout.Priority.ALWAYS);
 

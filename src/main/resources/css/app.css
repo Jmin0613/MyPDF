@@ -47,3 +47,37 @@
     -fx-background-color: white;
     -fx-border-color: #bdbdbd;
 }
+
+.organize-scroll {
+    -fx-background-color: white;
+    -fx-border-color: #bdbdbd;
+    -fx-background-radius: 0;
+}
+
+.organize-scroll > .viewport {
+    -fx-background-color: white;
+}
+
+.pdf-page-item {
+    -fx-padding: 8;
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #bdbdbd;
+    -fx-border-width: 1;
+    -fx-min-width: 155;
+    -fx-pref-width: 155;
+}
+
+.pdf-page-item.drop-before {
+    -fx-border-color: #333333 #bdbdbd #bdbdbd #333333;
+    -fx-border-width: 1 1 1 4;
+}
+
+.pdf-page-item.drop-after {
+    -fx-border-color: #bdbdbd #333333 #bdbdbd #bdbdbd;
+    -fx-border-width: 1 4 1 1;
+}
+
+.page-delete-button {
+    -fx-font-size: 11px;
+    -fx-padding: 3 7 3 7;
+}
