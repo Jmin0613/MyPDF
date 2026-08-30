@@ -8,13 +8,22 @@ PDF 파일을 외부 서버에 업로드하지 않고 로컬 PC에서 처리합�
 
 ### PDF 병합
 
+<img src="src/main/resources/images/001.png" width="700">
+
 여러 PDF 파일을 원하는 순서로 정렬하여 하나의 PDF로 병합합니다.
 
 ### PDF 분할
 
+<img src="src/main/resources/images/002.png" width="700">
+
 `1-5, 8, 10-15`와 같이 페이지를 지정하여 원하는 페이지만 새로운 PDF로 저장합니다.
 
 ### PDF 정리
+
+<p>
+  <img src="src/main/resources/images/003.png" width="48%">
+  <img src="src/main/resources/images/004.png" width="48%">
+</p>
 
 PDF 페이지를 썸네일로 확인하면서 정리할 수 있습니다.
 
