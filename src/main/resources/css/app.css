@@ -1,0 +1,49 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-background-color: #f4f4f4;
+}
+
+.app-title {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #202020;
+}
+
+.app-description, .hint {
+    -fx-text-fill: #666666;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #e7e7e7;
+}
+
+.tab, .button, .text-field, .table-view {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.button {
+    -fx-background-color: #e2e2e2;
+    -fx-border-color: #b8b8b8;
+    -fx-padding: 7 14 7 14;
+}
+
+.button:hover {
+    -fx-background-color: #d8d8d8;
+}
+
+.primary-button {
+    -fx-background-color: #3b3b3b;
+    -fx-border-color: #3b3b3b;
+    -fx-text-fill: white;
+}
+
+.primary-button:hover {
+    -fx-background-color: #222222;
+}
+
+.table-view, .text-field {
+    -fx-background-color: white;
+    -fx-border-color: #bdbdbd;
+}
