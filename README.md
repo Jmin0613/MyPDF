@@ -61,7 +61,7 @@ cd MyPDF
 .\gradlew.bat run
 ```
 
-##  업데이트 
+## 📢 업데이트 
 
 ### 10월 28일 : 이미지 → PDF
 
