@@ -1,6 +1,7 @@
 package com.mypdf;
 
 import com.mypdf.ui.MergeView;
+import com.mypdf.ui.ImageToPdfView;
 import com.mypdf.ui.OrganizeView;
 import com.mypdf.ui.SplitView;
 import javafx.application.Application;
@@ -28,7 +29,8 @@ public class MyPdfApplication extends Application {
         tabs.getTabs().addAll(
                 new Tab("PDF 병합", new MergeView(stage)),
                 new Tab("PDF 분할", new SplitView(stage)),
-                new Tab("PDF 정리", new OrganizeView(stage))
+                new Tab("PDF 정리", new OrganizeView(stage)),
+                new Tab("이미지 → PDF", new ImageToPdfView(stage))
         );
         VBox.setVgrow(tabs, javafx.scene.layout.Priority.ALWAYS);
 

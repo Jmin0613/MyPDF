@@ -61,3 +61,18 @@ cd MyPDF
 .\gradlew.bat run
 ```
 
+##  업데이트 
+
+### 10월 28일 : 이미지 → PDF
+
+JPG·PNG 이미지 여러 장을 원하는 순서로 정렬하여 PDF로 변환합니다.
+<p>
+  <img src="src/main/resources/images/update_001.png" width="700">
+</p>
+
+- JPG·PNG 여러 장을 하나의 PDF 또는 개별 PDF로 저장
+- 페이지 방향과 여백 설정 추가 (기본: 세로, 여백 없음)
+- 이미지별 좌우 90도 회전 및 클릭 시 확대 미리보기 지원
+- 이미지 순서 변경 및 중복 파일명 처리
+
+
